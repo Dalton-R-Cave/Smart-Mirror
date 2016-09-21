@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather</title>
+    <link rel="stylesheet" type="text/css" href="../CSS/Layout.css">
+</head>
+<body>
+<h1 id="weatherInfo">Current Weather</h1>
+
+<div id="container">
+    <div class="inner">
+        <h2 id="icon"></h2>
+        <img id="iconImage"/>
+    </div>
+
+    <div class="inner">
+        <h2>Wind Info:</h2>
+        <p id="windInfo"></p>
+    </div>
+
+    <div class="inner">
+        <h2>Humidity:</h2>
+        <p id="humid"></p>
+    </div>
+
+    <div class="inner">
+        <h2>UV Index:</h2>
+        <p id="UV"></p>
+    </div>
+
+    <div class="inner">
+        <h2>Precipitation:</h2>
+        <p id="precip"></p>
+    </div>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script>
+    jQuery(document).ready(function($) {
+        $.get("http://api.wunderground.com/api/6cf8f51750cd9713/geolookup/conditions/q/IA/Ames.json", function(json){
+            var location = json['location']['city'];
+            var temp_f = json['current_observation']['temp_f'];
+            var feels_like = json['current_observation']['feelslike_f'];
+            var wind_dir = json['current_observation']['wind_dir'];
+            var wind_mph = json['current_observation']['wind_mph'];
+            var relative_humidity = json['current_observation']['relative_humidity'];
+            var uv = json['current_observation']['UV'];
+            var precip = json['current_observation']['precip_1hr_in'];
+            var icon = json['current_observation']['icon'];
+            var iconUrl = json['current_observation']['icon_url'];
+            document.getElementById("weatherInfo").innerHTML = "Current Weather in " + location + " has temperature of " + temp_f + " F, but feels like " + feels_like + " F";
+            document.getElementById("windInfo").innerHTML = "Wind is blowing " + wind_dir + " at " + wind_mph + " mph.";
+            document.getElementById("humid").innerHTML = "The relative humidity is " + relative_humidity;
+            document.getElementById("UV").innerHTML = "The UV index is " + uv;
+            document.getElementById("precip").innerHTML = precip;
+            document.getElementById("icon").innerHTML = icon;
+            document.getElementById("iconImage").setAttribute("src", iconUrl);
+        }, "jsonp");
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+body {
+    background-color: lightslategrey;
+}
+
+h1 {
+    text-decoration: underline;
+    text-align: center;
+}
+
+div{
+    width: 25%;
+    height: inherit;
+    border: 7px groove dodgerblue;
+    background-color: lightsteelblue;
+    float:right;
+    clear:left;
+    margin-left: 75%;
+}
+
+.inner{
+    width: 100%;
+}
+
